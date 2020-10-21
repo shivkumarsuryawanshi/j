@@ -1,0 +1,18 @@
+//Fixed matrix
+public class Solution
+{
+	public static void main (String[] args){
+	    try{
+            long x=100000;
+            long y=100000;
+            String s=Solution.solution(x,y);
+            System.out.println(s);
+	    } catch(Exception e){
+	        System.out.println("Exception occurred: Please Enter x and y number in between 1 to 100000 only");
+	        System.out.println(e);
+	    } 		
+	}
+	public static String solution(long x, long y){
+        long f=0;if(x<(long)1||x>(long)100000||y<(long)1||y>(long)100000){return"Valid x and y in between 1 to 100000 only";}if((x+y-2)%2==0){f=((x+y-2)/2*(x+y-2))+((x+y-2)/2)+1;}else{f=2*((x+y-2)/2)+((x+y-2)/2*(x+y-2))+2;}return ""+(x+f-1);
+     }
+}
