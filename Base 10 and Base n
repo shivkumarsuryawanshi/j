@@ -1,0 +1,94 @@
+//Base 10 and Base n
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Solution
+{
+	public static void main (String[] args){
+	    try{
+            String n="210022";
+            int b=3;
+            n="1211";
+            b=10;
+            int s=Solution.solution(n,b);
+            System.out.println(s);
+	    } catch(Exception e){
+	        System.out.println("Exception occurred: "+e);
+	    } 		
+	}
+	public static int solution(String n,int b){
+	    if(!check(n,b)){return 0;}
+	    String x="";
+	    String y="";
+	    String z=n;
+        int k=n.length();
+        List t=new ArrayList();
+        while(!t.contains(z)){
+            t.add(z);
+            y=z.chars().sorted().collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+            x=reverse(y);
+            if(b==10){
+                z=""+(Integer.parseInt(x)-Integer.parseInt(y));
+            }
+            else{
+                z=c(""+(Integer.parseInt(d(y,b))-Integer.parseInt(d(x,b))),b);
+            }
+            z=padLeftZeros(z,k);
+        }
+        return (t.size())-(t.indexOf(z));
+     }
+    public static boolean check(String n,int b){
+        int i=0;
+        boolean a=true;
+        char[]s=n.toCharArray();
+        if(n.length()<=i){
+            a=true;
+            return a;
+        }
+        for(char c:s){ 
+            if(Character.getNumericValue(c)>=b){
+                a=false;
+            }
+        }
+        return a;
+    }
+    public static String padLeftZeros(String z, int k) {
+        if(z.length()>=k){
+            return z;
+        }
+        StringBuilder s=new StringBuilder();
+        while(s.length()<k-z.length()){
+            s.append('0');
+        }
+        s.append(z);
+        return s.toString();
+    }
+    public static String reverse(String s){
+      StringBuilder b=new StringBuilder();
+      b.append(s);
+      b.reverse();
+      return b.toString();
+    }
+    public static String d(String n,int b){
+        char[]s=n.toCharArray();
+        int t=0;
+        for (int i=0;i<s.length;i++){
+            char c=s[i];        
+            t+=Character.getNumericValue(c)*(int)Math.pow(b,i);
+        }
+        return""+t;
+    }
+    public static String c(String n,int b){
+        int a=Integer.parseInt(n);
+        List c=new ArrayList();
+        int d=0;
+        while(a>=b){
+            d=a%b;
+            c.add(Integer.toString(d));
+            a=(int)Math.floor((a-d)/b);
+        }
+        StringBuffer r=new StringBuffer();
+        c.forEach((s)->r.append(s));
+        return r.toString();
+    }
+}
