@@ -1,0 +1,17 @@
+//Staircase matrix
+import java.util.stream.IntStream;
+public class Solution {
+    public static int solution(int n) {
+        if (n<3||n>200){return 0;}
+        int s=n+1;
+        int[][]m=new int[s][s]; 
+        m[0][0]=1;
+        IntStream.range(1,s).forEachOrdered(i->{
+            IntStream.range(0,s).forEachOrdered(j->{
+                m[i][j]=m[i-1][j];
+                if(j>=i)m[i][j]+=m[i-1][j-i];
+            });    
+        });    
+        return m[n][n]-1;
+    }
+}
